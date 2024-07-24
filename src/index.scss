@@ -28,3 +28,7 @@ $theme-colors: (
     "dark": #053b62);
 
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+    .clickable {
+        cursor: pointer;
+        }

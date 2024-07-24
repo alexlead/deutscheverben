@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from './views/HomePage';
 import CommonNavbar from './components/common/CommonNavbar';
 import TableView from './views/TableView';
+import MemoView from './views/MemoView';
+import TestView from './views/TestView';
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/table' element={<TableView />} />
+        <Route path='/memo' element={<MemoView />} />
+        <Route path='/test' element={<TestView />} />
 
         <Route path="*" element={<Navigate to="/" />} />
   
