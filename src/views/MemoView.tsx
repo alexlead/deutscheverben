@@ -88,12 +88,15 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = (props) => {
 
         if( playStatus ) {
            
-                setTimeout(  getNextCard, 5000 );
+                setTimeout(  getNextCard, 10000 );
         }
 
     }, [currentCardId, playStatus ])
 
     const playVerb = () => {
+        if ( answerStatus ) {
+            playText( verbenList[currentCardId]?.translation + "." , "ru-RU");
+        }
         playText( verbenList[currentCardId]?.verb + "... " + verbenList[currentCardId]?.past + "... " + verbenList[currentCardId]?.partizip , "de-DE");
     }
 
