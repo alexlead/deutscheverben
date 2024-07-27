@@ -5,6 +5,7 @@ import { verb } from '../types/dataTypes';
 import CommonFilters from '../components/common/CommonFilters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import TestQuestion from '../components/test/TestQuestion';
 
 interface ITestViewProps {
 }
@@ -14,15 +15,30 @@ const TestView: React.FunctionComponent<ITestViewProps> = (props) => {
     const dataList: verb[] = verben as verb[];
     const [verbenList, setVerbenList] = useState<verb[]>([]);
     const [filterLevels, setFilterLevels] = useState<string[]>([])
+    const [qtyQuestions, setQtyQuestions] = useState<number>(10)
+    const [checkStatus, setCheckStatus ] = useState<boolean>(false)
 
 
     const updateFilterLevels = (levelsList: string[]): void => {
         setFilterLevels(levelsList)
     }
 
-    const updateVerbenList = () => {
-        setVerbenList( [ ...shuffleVerbenList(verbenList)] );
+    const toggleQtyQuestions = () => {
+        if ( qtyQuestions === 10 ) {
+            setQtyQuestions(0)
+        } else {
+            setQtyQuestions(10)
+        }
     }
+
+    const checkUsersAnswers = () => {
+        setCheckStatus(true)
+    }
+
+    const updateVerbenList = () => {
+        setCheckStatus(false)
+        setVerbenList( [ ...shuffleVerbenList(verbenList)] );
+    }   
 
     const shuffleVerbenList = (array: verb[]) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -39,8 +55,16 @@ const TestView: React.FunctionComponent<ITestViewProps> = (props) => {
             verbList = [...verbList.filter((item) => filterLevels.includes(item.level))]
         }
 
-        setVerbenList(shuffleVerbenList(verbList));
-    }, [filterLevels])
+        verbList = [ ...shuffleVerbenList(verbList) ]
+
+        if( qtyQuestions ) {
+            verbList = [ ...verbList.slice(0, qtyQuestions ) ]
+        }
+        
+        setCheckStatus(false)
+
+        setVerbenList( verbList );
+    }, [filterLevels, qtyQuestions])
 
 
     return (
@@ -59,8 +83,8 @@ const TestView: React.FunctionComponent<ITestViewProps> = (props) => {
                 <Col>
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><FontAwesomeIcon icon={faArrowsRotate} /></button>
-                        <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><strong>10 | all</strong></button>
-                        <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><FontAwesomeIcon icon={faListCheck} /></button>
+                        <button type="button" className="btn btn-outline-primary" onClick={toggleQtyQuestions}><span className='h6'>{ qtyQuestions === 10 ? <>10</> : <>all</>}</span></button>
+                        <button type="button" className="btn btn-outline-primary" onClick={checkUsersAnswers}><FontAwesomeIcon icon={faListCheck} /></button>
        
                     </div>
                 </Col>
@@ -80,20 +104,28 @@ const TestView: React.FunctionComponent<ITestViewProps> = (props) => {
                         </thead>
                         <tbody>
 
-
                             {
-                                verbenList.map((verb, i) => <tr key={verb.id}>
-                                    <td>{i + 1}</td>
-                                    <td><input type='text' /></td>
-                                    <td><input type='text' /></td>
-                                    <td><input type='text' /></td>
-                                    <td>{verb.translation}</td>
-                                </tr>)
+                                verbenList.map((verb, i) =>
+                                    (
+                                        <TestQuestion  index={ i+1 } verb={ verb} checkStatus={ checkStatus } />
+                                    ) 
+                                
+                                )
                             }
                         </tbody>
                     </Table>
 
 
+                </Col>
+            </Row>
+
+            <Row className='mt-4 mb-4'>
+                <Col className='text-end'>
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-outline-primary" onClick={checkUsersAnswers}><FontAwesomeIcon icon={faListCheck} /> Проверить ответы</button>
+                        <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><FontAwesomeIcon icon={faArrowsRotate} /> Новый тест</button>
+       
+                    </div>
                 </Col>
             </Row>
         </Container>

@@ -53,6 +53,9 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = (props) => {
     }
 
     const getShuffledCard = () : void => {
+        
+        let nextId = currentCardId;
+        
         setCurrentCardId ( Math.floor(Math.random() * verbenList.length) )
     }
 
