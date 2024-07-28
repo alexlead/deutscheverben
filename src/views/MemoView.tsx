@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import verben from '../data/verbs.json';
 import { verb } from '../types/dataTypes';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
 import { playText } from '../helpers/playText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
