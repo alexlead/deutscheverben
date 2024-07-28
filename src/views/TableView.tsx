@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import verben from '../data/verbs.json';
-import { verb, levels } from '../types/dataTypes';
+import { verb } from '../types/dataTypes';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,7 @@ interface ITableViewProps {
 
 
 
-const TableView: React.FunctionComponent<ITableViewProps> = (props) => {
+const TableView: React.FunctionComponent<ITableViewProps> = () => {
 
     const dataList: verb[] =  verben as verb[];
     const [verbenList, setVerbenList] = useState<verb[]>([]);

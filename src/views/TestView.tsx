@@ -10,7 +10,7 @@ import TestQuestion from '../components/test/TestQuestion';
 interface ITestViewProps {
 }
 
-const TestView: React.FunctionComponent<ITestViewProps> = (props) => {
+const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
     const dataList: verb[] = verben as verb[];
     const [verbenList, setVerbenList] = useState<verb[]>([]);

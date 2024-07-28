@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { verb } from '../../types/dataTypes';
 import TestInput from './TestInput';
 

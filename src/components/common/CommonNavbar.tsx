@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import {  Container,  Nav, Navbar } from 'react-bootstrap';
 
 
 interface ICommonNavbarProps {
 }
 
-const CommonNavbar: React.FunctionComponent<ICommonNavbarProps> = (props) => {
+const CommonNavbar: React.FunctionComponent<ICommonNavbarProps> = () => {
   return (
 
       <Navbar expand="lg" className="bg-primary text-white" fixed="top" >

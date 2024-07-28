@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
 import { levels } from './../../types/dataTypes';
 
 interface ICommonFiltersProps {
@@ -23,7 +23,7 @@ const switchedOnLevels = (e: React.ChangeEvent<HTMLInputElement>) => {
     <div className="input-group mb-3">
     {levels.map( (level, i) => 
     <div className="form-check form-switch mx-3" key={i}>
-        <label><input type="checkbox" className="form-check-input" key={i} value={level} onChange={(e)=> switchedOnLevels(e) } checked={filterLevels.includes(level) ? 'checked' : '' } />{level}</label> 
+        <label><input type="checkbox" className="form-check-input" key={i} value={level} onChange={(e)=> switchedOnLevels(e) } checked={filterLevels.includes(level) ? true : false } />{level}</label> 
     </div>
     )}
     </div>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 interface IHomePageProps {
 }
 
-const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
+const HomePage: React.FunctionComponent<IHomePageProps> = () => {
   return (
     <>
 

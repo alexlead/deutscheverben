@@ -1,16 +1,16 @@
-import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import verben from '../data/verbs.json';
 import { verb } from '../types/dataTypes';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
 import { playText } from '../helpers/playText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpAZ, faBackward, faBackwardFast, faEye, faEyeSlash, faForward, faForwardFast, faPlay, faShuffle, faStop, faVolumeHigh, faVolumeOff, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpAZ, faBackward, faBackwardFast, faEye, faEyeSlash, faForward, faForwardFast, faPlay, faShuffle, faStop, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IMemoViewProps {
 }
 
-const MemoView: React.FunctionComponent<IMemoViewProps> = (props) => {
+const MemoView: React.FunctionComponent<IMemoViewProps> = () => {
     const dataList: verb[] = verben as verb[];
     const [verbenList, setVerbenList] = useState<verb[]>([]);
     const [currentCardId, setCurrentCardId] = useState<number>(0);
@@ -53,8 +53,6 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = (props) => {
     }
 
     const getShuffledCard = () : void => {
-        
-        let nextId = currentCardId;
         
         setCurrentCardId ( Math.floor(Math.random() * verbenList.length) )
     }
