@@ -6,6 +6,9 @@ import CommonFilters from '../components/common/CommonFilters';
 import { playText } from '../helpers/playText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpAZ, faBackward, faBackwardFast, faEye, faEyeSlash, faForward, faForwardFast, faPlay, faShuffle, faStop, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { selectLevels } from '../store/slices/levelFiltersSlice';
+import { selectUserList } from '../store/slices/userListSlice';
 
 interface IMemoViewProps {
 }
@@ -19,11 +22,8 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = () => {
     const [ orderingStatus , setOrderingStatus ] = useState<boolean>(false)
     const [ answerStatus , setAnswerStatus ] = useState<boolean>(true)
 
-    const [filterLevels, setFilterLevels] = useState<string[]>([])
-
-    const updateFilterLevels = (levelsList: string[]): void => {
-        setFilterLevels(levelsList)
-    }
+    const reduxFiltersData = useSelector(selectLevels);
+    const reduxUserListsData = useSelector(selectUserList);
 
     const getFirstCard = (): void => {
         setCurrentCardId( 0 )
@@ -73,13 +73,17 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = () => {
     useEffect(() => {
         let verbList = [...dataList]
 
-        if (filterLevels.length) {
-            verbList = [...verbList.filter((item) => filterLevels.includes(item.level))]
+        if ( reduxFiltersData.filterMyList ) {
+            verbList = [ ... verbList.filter((item)=>reduxUserListsData.userVerbenList.includes(item.id)) ]
+        } else {
+        if( reduxFiltersData.filterLevelsArray.length ) {
+            verbList = [ ... verbList.filter((item)=>reduxFiltersData.filterLevelsArray.includes(item.level)) ]
         }
+    }
 
         setCurrentCardId(0);
         setVerbenList(verbList);
-    }, [filterLevels])
+    }, [reduxFiltersData.filterLevelsArray, reduxFiltersData.filterMyList])
 
     useEffect( () => {
 
@@ -112,7 +116,7 @@ const MemoView: React.FunctionComponent<IMemoViewProps> = () => {
             </Row>
             <Row className='mt-4 mb-4'>
                 <Col>
-                    <CommonFilters filterLevels={filterLevels} updateFilterLevels={updateFilterLevels} />
+                    <CommonFilters />
                 </Col>
             </Row>
             <Row className='mt-4 mb-4'>
