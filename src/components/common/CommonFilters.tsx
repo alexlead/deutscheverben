@@ -36,7 +36,7 @@ const CommonFilters: React.FunctionComponent<ICommonFiltersProps> = () => {
     <>
       <div className="input-group mb-3">
         <div className="form-check form-switch mx-3 ">
-          <label className='fs-4'><input type="checkbox" className="form-check-input" onChange={(e) => switchOnUserList(e)} checked={reduxFiltersData.filterMyList ? true : false} />My list</label>
+          <label className='fs-4'><input type="checkbox" className="form-check-input" onChange={() => switchOnUserList()} checked={reduxFiltersData.filterMyList ? true : false} />My list</label>
         </div>
       </div>
 
