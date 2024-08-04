@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import verben from '../data/verbs.json';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { verb } from '../types/dataTypes';
 import CommonFilters from '../components/common/CommonFilters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import TestQuestion from '../components/test/TestQuestion';
+import {  useSelector } from 'react-redux';
+import { selectLevels } from '../store/slices/levelFiltersSlice';
+import { selectUserList } from '../store/slices/userListSlice';
+import { selectVerben } from '../store/slices/verbenSlice';
 
 interface ITestViewProps {
 }
 
 const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
-    const dataList: verb[] = verben as verb[];
+    const dataList  = useSelector(selectVerben).verbList;
+
     const [verbenList, setVerbenList] = useState<verb[]>([]);
-    const [filterLevels, setFilterLevels] = useState<string[]>([])
     const [qtyQuestions, setQtyQuestions] = useState<number>(10)
     const [checkStatus, setCheckStatus ] = useState<boolean>(false)
 
 
-    const updateFilterLevels = (levelsList: string[]): void => {
-        setFilterLevels(levelsList)
-    }
+    const reduxFiltersData = useSelector(selectLevels);
+    const reduxUserListsData = useSelector(selectUserList);
 
     const toggleQtyQuestions = () => {
         if ( qtyQuestions === 10 ) {
@@ -51,10 +53,13 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
     useEffect(() => {
         let verbList = [...dataList]
 
-        if (filterLevels.length) {
-            verbList = [...verbList.filter((item) => filterLevels.includes(item.level))]
+        if ( reduxFiltersData.filterMyList ) {
+            verbList = [ ... verbList.filter((item)=>reduxUserListsData.userVerbenList.includes(item.id)) ]
+        } else {
+        if( reduxFiltersData.filterLevelsArray.length ) {
+            verbList = [ ... verbList.filter((item)=>reduxFiltersData.filterLevelsArray.includes(item.level)) ]
         }
-
+        }
         verbList = [ ...shuffleVerbenList(verbList) ]
 
         if( qtyQuestions ) {
@@ -64,7 +69,7 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
         setCheckStatus(false)
 
         setVerbenList( verbList );
-    }, [filterLevels, qtyQuestions])
+    }, [reduxFiltersData.filterLevelsArray, reduxFiltersData.filterMyList, qtyQuestions])
 
 
     return (
@@ -76,7 +81,7 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
             </Row>
             <Row className='mt-4 mb-4'>
                 <Col>
-                    <CommonFilters filterLevels={filterLevels} updateFilterLevels={updateFilterLevels} />
+                    <CommonFilters />
                 </Col>
             </Row>
             <Row className='mt-4 mb-4'>
