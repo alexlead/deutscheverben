@@ -28,7 +28,7 @@ const CommonFilters: React.FunctionComponent<ICommonFiltersProps> = () => {
     }
   }
 
-  const switchOnUserList = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const switchOnUserList = () => {
     dispatch(toggleMyList(!reduxFiltersData.filterMyList))
   }
 

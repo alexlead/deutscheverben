@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import verben from '../data/verbs.json';
 import { verb } from '../types/dataTypes';
 import { Col, Container, Row } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
@@ -9,12 +8,13 @@ import { faArrowUpAZ, faBackward, faBackwardFast, faEye, faEyeSlash, faForward, 
 import { useSelector } from 'react-redux';
 import { selectLevels } from '../store/slices/levelFiltersSlice';
 import { selectUserList } from '../store/slices/userListSlice';
+import { selectVerben } from '../store/slices/verbenSlice';
 
 interface IMemoViewProps {
 }
 
 const MemoView: React.FunctionComponent<IMemoViewProps> = () => {
-    const dataList: verb[] = verben as verb[];
+    const dataList  = useSelector(selectVerben).verbList;
     const [verbenList, setVerbenList] = useState<verb[]>([]);
     const [currentCardId, setCurrentCardId] = useState<number>(0);
     const [ playStatus , setPlayStatus ] = useState<boolean>(false)

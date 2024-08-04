@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import verben from '../data/verbs.json';
 import { verb } from '../types/dataTypes';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
@@ -9,6 +8,7 @@ import { playText } from '../helpers/playText';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLevels } from '../store/slices/levelFiltersSlice';
 import { addVerbId, removeVerbId, selectUserList } from '../store/slices/userListSlice';
+import { selectVerben } from '../store/slices/verbenSlice';
 interface ITableViewProps {
 }
 
@@ -16,7 +16,7 @@ interface ITableViewProps {
 
 const TableView: React.FunctionComponent<ITableViewProps> = () => {
 
-    const dataList: verb[] =  verben as verb[];
+    const dataList  = useSelector(selectVerben).verbList;
     const [verbenList, setVerbenList] = useState<verb[]>([]);
 
     const dispatch = useDispatch();

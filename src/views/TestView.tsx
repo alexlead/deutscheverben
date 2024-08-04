@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import verben from '../data/verbs.json';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { verb } from '../types/dataTypes';
 import CommonFilters from '../components/common/CommonFilters';
@@ -16,23 +15,15 @@ interface ITestViewProps {
 
 const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
-    // const dataList: verb[] = verben as verb[];
     const dataList  = useSelector(selectVerben).verbList;
 
-    // console.log(  dataList1.verbList )
     const [verbenList, setVerbenList] = useState<verb[]>([]);
-    const [filterLevels, setFilterLevels] = useState<string[]>([])
     const [qtyQuestions, setQtyQuestions] = useState<number>(10)
     const [checkStatus, setCheckStatus ] = useState<boolean>(false)
 
 
     const reduxFiltersData = useSelector(selectLevels);
     const reduxUserListsData = useSelector(selectUserList);
-
-
-    const updateFilterLevels = (levelsList: string[]): void => {
-        setFilterLevels(levelsList)
-    }
 
     const toggleQtyQuestions = () => {
         if ( qtyQuestions === 10 ) {
@@ -90,7 +81,7 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
             </Row>
             <Row className='mt-4 mb-4'>
                 <Col>
-                    <CommonFilters filterLevels={filterLevels} updateFilterLevels={updateFilterLevels} />
+                    <CommonFilters />
                 </Col>
             </Row>
             <Row className='mt-4 mb-4'>
