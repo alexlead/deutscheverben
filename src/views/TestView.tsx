@@ -5,7 +5,7 @@ import CommonFilters from '../components/common/CommonFilters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import TestQuestion from '../components/test/TestQuestion';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectLevels } from '../store/slices/levelFiltersSlice';
 import { selectUserList } from '../store/slices/userListSlice';
 import { selectVerben } from '../store/slices/verbenSlice';
@@ -15,18 +15,18 @@ interface ITestViewProps {
 
 const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
-    const dataList  = useSelector(selectVerben).verbList;
+    const dataList = useSelector(selectVerben).verbList;
 
     const [verbenList, setVerbenList] = useState<verb[]>([]);
     const [qtyQuestions, setQtyQuestions] = useState<number>(10)
-    const [checkStatus, setCheckStatus ] = useState<boolean>(false)
+    const [checkStatus, setCheckStatus] = useState<boolean>(false)
 
 
     const reduxFiltersData = useSelector(selectLevels);
     const reduxUserListsData = useSelector(selectUserList);
 
     const toggleQtyQuestions = () => {
-        if ( qtyQuestions === 10 ) {
+        if (qtyQuestions === 10) {
             setQtyQuestions(0)
         } else {
             setQtyQuestions(10)
@@ -39,8 +39,8 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
     const updateVerbenList = () => {
         setCheckStatus(false)
-        setVerbenList( [ ...shuffleVerbenList(verbenList)] );
-    }   
+        setVerbenList([...shuffleVerbenList(verbenList)]);
+    }
 
     const shuffleVerbenList = (array: verb[]) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -53,22 +53,22 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
     useEffect(() => {
         let verbList = [...dataList]
 
-        if ( reduxFiltersData.filterMyList ) {
-            verbList = [ ... verbList.filter((item)=>reduxUserListsData.userVerbenList.includes(item.id)) ]
+        if (reduxFiltersData.filterMyList) {
+            verbList = [...verbList.filter((item) => reduxUserListsData.userVerbenList.includes(item.id))]
         } else {
-        if( reduxFiltersData.filterLevelsArray.length ) {
-            verbList = [ ... verbList.filter((item)=>reduxFiltersData.filterLevelsArray.includes(item.level)) ]
+            if (reduxFiltersData.filterLevelsArray.length) {
+                verbList = [...verbList.filter((item) => reduxFiltersData.filterLevelsArray.includes(item.level))]
+            }
         }
-        }
-        verbList = [ ...shuffleVerbenList(verbList) ]
+        verbList = [...shuffleVerbenList(verbList)]
 
-        if( qtyQuestions ) {
-            verbList = [ ...verbList.slice(0, qtyQuestions ) ]
+        if (qtyQuestions) {
+            verbList = [...verbList.slice(0, qtyQuestions)]
         }
-        
+
         setCheckStatus(false)
 
-        setVerbenList( verbList );
+        setVerbenList(verbList);
     }, [reduxFiltersData.filterLevelsArray, reduxFiltersData.filterMyList, qtyQuestions])
 
 
@@ -88,9 +88,9 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
                 <Col>
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><FontAwesomeIcon icon={faArrowsRotate} /></button>
-                        <button type="button" className="btn btn-outline-primary" onClick={toggleQtyQuestions}><span className='h6'>{ qtyQuestions === 10 ? <>10</> : <>all</>}</span></button>
+                        <button type="button" className="btn btn-outline-primary" onClick={toggleQtyQuestions}><span className='h6'>{qtyQuestions === 10 ? <>10</> : <>all</>}</span></button>
                         <button type="button" className="btn btn-outline-primary" onClick={checkUsersAnswers}><FontAwesomeIcon icon={faListCheck} /></button>
-       
+
                     </div>
                 </Col>
             </Row>
@@ -111,10 +111,10 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
 
                             {
                                 verbenList.map((verb, i) =>
-                                    (
-                                        <TestQuestion  index={ i+1 } verb={ verb} checkStatus={ checkStatus } />
-                                    ) 
-                                
+                                (
+                                    <TestQuestion index={i + 1} verb={verb} checkStatus={checkStatus} />
+                                )
+
                                 )
                             }
                         </tbody>
@@ -129,7 +129,7 @@ const TestView: React.FunctionComponent<ITestViewProps> = () => {
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-outline-primary" onClick={checkUsersAnswers}><FontAwesomeIcon icon={faListCheck} /> Проверить ответы</button>
                         <button type="button" className="btn btn-outline-primary" onClick={updateVerbenList}><FontAwesomeIcon icon={faArrowsRotate} /> Новый тест</button>
-       
+
                     </div>
                 </Col>
             </Row>
