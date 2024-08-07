@@ -4,11 +4,13 @@ import verben from '../../data/verbs.json';
 import { verb } from '../../types/dataTypes';
 
 interface IVerbenState {
-    verbList: verb[];    
+    verbList: verb[];  
+    filteredVerbenList: verb[];  
 };
 
 const initialState: IVerbenState = {
-    verbList: [ ...verben] 
+    verbList: [ ...verben],
+    filteredVerbenList:  [ ...verben] 
 };
 
 export const verbenSlice = createSlice({
