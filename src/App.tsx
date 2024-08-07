@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route } from 'react-router-dom';
 import HomePage from './views/HomePage';
 import CommonNavbar from './components/common/CommonNavbar';
 import TableView from './views/TableView';
