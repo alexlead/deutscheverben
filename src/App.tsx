@@ -1,4 +1,4 @@
-import { HashRouter, Navigate, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route } from 'react-router-dom';
 import HomePage from './views/HomePage';
 import CommonNavbar from './components/common/CommonNavbar';
 import TableView from './views/TableView';
@@ -11,7 +11,7 @@ function App() {
     <>
     <CommonNavbar />
     <div className='mt-3 mb-3 pt-5'/>
-      <HashRouter>
+      <BrowserRouter basename='/deutscheverben/'>
         <Route path='/' element={<HomePage />} />
         <Route path='/table' element={<TableView />} />
         <Route path='/memo' element={<MemoView />} />
@@ -19,7 +19,7 @@ function App() {
 
         <Route path="*" element={<Navigate to="/" />} />
   
-      </HashRouter>
+      </BrowserRouter>
 
     </>
   );
