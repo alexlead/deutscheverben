@@ -9,18 +9,15 @@ function App() {
 
   return (
     <>
-    <CommonNavbar />
-    <div className='mt-3 mb-3 pt-5'/>
+      <CommonNavbar />
+      <div className='mt-3 mb-3 pt-5' />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/table' element={<TableView />} />
         <Route path='/memo' element={<MemoView />} />
         <Route path='/test' element={<TestView />} />
-
         <Route path="*" element={<Navigate to="/" />} />
-  
       </Routes>
-
     </>
   );
 }

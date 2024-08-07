@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { verb } from '../types/dataTypes';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import CommonFilters from '../components/common/CommonFilters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
@@ -102,7 +102,8 @@ const TableView: React.FunctionComponent<ITableViewProps> = () => {
             </Row>
             <Row>
                 <Col>
-                    <Table striped bordered hover>
+                <div className="table-responsive-md">
+                    <table className='table table-striped table-bordered table-hover'>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -137,8 +138,8 @@ const TableView: React.FunctionComponent<ITableViewProps> = () => {
                                 </tr>)
                             }
                         </tbody>
-                    </Table>
-
+                    </table>
+                    </div>
                 </Col>
 
             </Row>
