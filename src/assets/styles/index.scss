@@ -1,0 +1,34 @@
+
+$white: #ffffff;
+
+    
+$theme-colors-light: #d4e9f1;
+$theme-colors-dark: #053b62;
+$theme-colors-primary: #338c36;
+$theme-colors-secondary: #49af47;
+$theme-colors-info: #b6d79b;
+$theme-colors-accent1: #164477;
+$theme-colors-accent2: #1b85c4;
+$theme-colors-accent3: #8dd4e2;
+$theme-colors-success: #10bc19;
+$theme-colors-warning: #fec90e;
+$theme-colors-danger: #fc064d;
+
+$theme-colors: (
+    "light-grey": #dfdfdf,
+    "grey": #cccccc,
+    "white": #ffffff,
+    "primary": #164477,
+    "secondary": #1b85c4,
+    "success": #10bc19,
+    "info": #8dd4e2,
+    "warning": #fec90e,
+    "danger": #fc064d,
+    "light": #d4e9f1,
+    "dark": #053b62);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+    .clickable {
+        cursor: pointer;
+        }
